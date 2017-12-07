@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-heading"> <span>Stores</span>
+            <div class="page-actions pull-right">
+                <a class="btn btn-success" ui-sref="app.addStore">Add Store</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table ng-table="tableParams" show-filter="isFiltersVisible" class="table table-striped table-bordered list-table">
+                <tr ng-repeat="row in $data ">
+                    <td data-title="'Sr No.'">{{$index+1}}</td>
+                    <td data-title="'Store Logo'"><img src="{{SITE_URL}}{{row.logo}}" width="50" height="50"> </td>
+                    
+                    <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">{{row.name}} </td>
+                    <td data-title="'Type'" sortable="'type'" filter="{ 'type': 'text' }">{{row.type}}</td>
+                    <td data-title="'Phone'" sortable="'phone'" filter="{ 'phone': 'text' }">{{row.phone}}</td>
+                    <td data-title="'Email'" sortable="'email'" filter="{ 'email': 'text' }">{{row.email}}</td>
+                    <td data-title="'Make'" sortable="'make'" filter="{ 'make': 'text' }">{{row.makeId.name}}</td>
+                    <td data-title="'City'" sortable="'city'" filter="{ 'city': 'text' }">{{row.city}}</td>
+
+                    <td data-title="'Actions'">
+                        <a class="btn btn-warning btn-xs" ui-sref="app.addStore({storeId:row._id})">Edit</a>
+                        <a class="btn btn-danger btn-xs" ng-click="deleteStore(row)">Delete</a>
+                    </td>
+                </tr>
+            </table>
+            </table>
+        </div>
+    </div>
+</div>

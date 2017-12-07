@@ -1,0 +1,53 @@
+<form name="frmAddQuestion" role="form" ng-submit="saveQuestion(frmAddQuestion)">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Question</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="">Question <span class="symbol required "></span></label>
+            <input type="text" name="displayText" class="form-control" ng-model="questionModel.displayText" required />
+        </div>
+        <div class="form-group">
+            <label>Type <span class="symbol required "></span></label>
+            <label class="radio-inline">
+                <input type="radio" name="type" value="Rating" ng-model="questionModel.type" required>Rating
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="type" value="Opinion" ng-model="questionModel.type">Opinion
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="type" value="Boolean" ng-model="questionModel.type">Boolean
+            </label>
+        </div>
+        <div ng-show="questionModel.type=='Boolean'">
+            <div class="form-group">
+                <label for="">Options <small class="text-muted"> Comma separated values</small></label>
+                <input type="text" name="options" class="form-control" ng-model="options" required />
+                <small>e.g. (Yes,No)</small>
+               
+            </div>
+            <div class="form-group">
+                <label for="">Option values<small class="text-muted"> Comma separated values</small></label>
+                <input type="text" name="optionValues" class="form-control"  value="1,0" ng-readonly="true"  value="1,0" required />
+                <small>e.g. (1,0)</small>
+                
+            </div>
+        </div>
+        <div ng-show="questionModel.type!='Boolean'">
+            <div class="form-group">
+                <label for="">Options<small class="text-muted">Comma separated values</small></label>
+                <input type="text" name="options" class="form-control" ng-model="options" required />
+                 <small>e.g. (terrible,poor,average,very good,excellent)</small>
+            </div>
+            <div class="form-group">
+                <label for="">Option values <small class="text-muted">Comma separated values</small></label>
+                <input type="text" name="optionValues" class="form-control"  ng-model="optionValues" />
+                <small>e.g. (1,2,3,4,5)</small>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="ng-submit" ng-disabled="processing">{{processing || 'Save'}}</button>
+        <button class="btn btn-default btn-o" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

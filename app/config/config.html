@@ -1,0 +1,35 @@
+<div class="row" ng-init="getSystemConfig()">
+    <div class="col-md-12">
+        <div class="page-heading"> <span>System Config</span>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <form role="form" id="frmEditConfig" name="frmEditConfig">
+            <table class="table table-striped table-bordered list-table">
+                <thead>
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Config Key</th>
+                        <th>Config Value</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="config in allConfigs">
+                        
+                          <td>{{$index+1}}</td>
+                        <td> {{config.key}} </td>
+                        <td>
+                            <textarea class="form-control" ng-model="config.value" rows="4">{{config.value}}</textarea>
+                        </td>
+                        <td>
+                            <a href="javascript:;" class="btn btn-success" ng-click="updateConfig(config._id,config.value)">Update</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>

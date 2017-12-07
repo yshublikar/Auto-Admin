@@ -1,0 +1,11 @@
+<header id="header" data-ng-include src="'app/_includes/header.html'"></header>
+<section id="main">
+    <!-- contents section -->
+    <div class="loader" ng-show="isLoader">
+    	<div class="spinner" ></div>
+    </div>
+    <div ng-show="!isLoader" class="container-fluid" style="padding-top:55px;padding-bottom: 20px;min-height: 575px;">
+        <data ui-view></data>
+    </div>
+</section>
+<footer id="footer" data-ng-include src="'app/_includes/footer.html'"></footer>

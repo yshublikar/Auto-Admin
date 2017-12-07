@@ -1,0 +1,86 @@
+<form name="frmCarModel" role="form" ng-submit="saveCarModel(frmCarModel)">
+    <div class="modal-header">
+        <h3 class="modal-title">Add Model</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="">Select Make</label>
+            <select class="form-control" name="make" ng-model="model.makeId" ng-init="model.makeId ? model.makeId : options[0].value" required>
+                <option value="" disabled>Select</option>
+                <option ng-repeat="make in makes" value="{{make._id}}">{{make.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Model Name <span class="symbol required "></span></label>
+            <input type="text" name="modelName" class="form-control" ng-model="model.model" required/>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Body Style</label>
+                    <select class="form-control" name="bodyStyle" ng-model="model.bodyStyle" ng-init="model.bodyStyle = options[0].value" required>
+                        <option value="" disabled>Select</option>
+                        <option ng-repeat="item in getAllConfigs.bodyStyles" value="{{item._id}}">{{item.masterValue}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Segment Type</label>
+                    <select class="form-control" name="segmentType" ng-model="model.segmentType" ng-init="model.segmentType = options[0].value" required>
+                        <option value="" disabled>Select</option>
+                        <option ng-repeat="item in getAllConfigs.segmentTypes" value="{{item._id}}">{{item.masterValue}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend>Variants</legend>
+            <div class="row" ng-repeat="variant in model.variants">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" ng-model="variant.name">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Engine Type</label>
+                        <select class="form-control" ng-model="variant.engineType">
+                            <option ng-repeat="item in getAllConfigs.engineTypes" value="{{item._id}}">{{item.masterValue}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label> &nbsp;</label>
+                    <button class="btn btn-danger btn-xs" ng-click="removeVariant($index)"><i class="fa fa-minus"></i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control" ng-model="variant.name" ng-required="flagVariant">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Engine Type</label>
+                        <select class="form-control" name="engineType" ng-model="variant.engineType" ng-init="variant.engineType = options[0].value" ng-required="flagVariant">
+                            <option value="">Select</option>
+                            <option ng-repeat="item in getAllConfigs.engineTypes" value="{{item._id}}">{{item.masterValue}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label> &nbsp;</label>
+                    <button type="button" class="btn btn-success btn-xs" ng-click="saveVariant()"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">{{processing?'processing': editCarModelData?'Update':'Save'}}</button>
+        <button class="btn btn-default btn-o" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

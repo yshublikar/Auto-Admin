@@ -1,0 +1,34 @@
+<form name="frmAddCity" role="form" ng-submit="addCity(frmAddCity)">
+    <div class="modal-header">
+        <h3 class="modal-title">{{isEdit?'Edit City':'Add City'}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="">City Name <span class="symbol required "></span></label>
+            <input type="text" name="name" class="form-control" ng-model="cityModel.name" required />
+        </div>
+        <div class="form-group">
+            <label for="">State Name <span class="symbol required "></span></label>
+            <input type="text" name="state" class="form-control" ng-model="cityModel.state" required />
+        </div>
+        <div class="form-group">
+            <label for="">Country <span class="symbol required "></span></label>
+            <input type="text" name="country" class="form-control" ng-model="cityModel.country" required />
+        </div>
+         <div class="form-group">
+            <label for=""> Latitude <span class="symbol required "></span></label>
+            <div>
+                <input type="number" name="latitude" class="form-control" step="any" ng-model="latitude" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for=""> Longitude <span class="symbol required "></span></label>
+            <input type="number" name="longitude" class="form-control" step="any" ng-model="longitude" required />
+        </div>
+       
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

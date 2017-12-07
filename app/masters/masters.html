@@ -1,0 +1,54 @@
+<div class="row" ng-init="getSystemConfig()">
+    <div class="col-md-12">
+        <div class="page-heading"> <span>Masters</span>
+            <div class="page-actions pull-right">
+                <select class="form-control" ng-model="masterKey" ng-change="getAllMastersByKey()">
+                    <option>Select Master</option>
+                    <option value="Car_Body_Styles">Car Body Styles</option>
+                    <option value="Car_Engine_Types">Car Engine Types</option>
+                    <option value="Car_Segment_Types">Car Segment Types</option>
+                    <option value="FAQ_Sections">FAQ Sections</option>
+                    <option value="FAQ_Categories">FAQ Categories</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <form role="form" id="frmEditConfig" name="frmEditConfig" ng-submit="addMsater()">
+    <div class="col-md-12">
+        <div class="table-responsive">
+                <table class="table table-striped table-bordered list-table">
+                    <thead>
+                        <tr>
+                            <th>Values</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" ng-model="masterValue" class="form-control" required=""> </td>
+                            <td>
+                             
+                                 <button type="submit" class="btn btn-primary btn-xs" >Save</button>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="master in masters">
+                            <td>
+                                <input type="text" ng-model="master.masterValue" class="form-control"> </td>
+                            <td>
+                                <a href="javascript:;" class="btn btn-success btn-xs" ng-click="updateMaster(master)">Update</a>
+                                <a href="javascript:;" class="btn btn-danger btn-xs" ng-click="deleteMasterKey(master)">Delete</a>
+                            </td>
+                        </tr>
+                        <tr ng-if="masters.length==0">
+                            <td colspan="2">
+                                <p>No Data Avaialble</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            
+        </div>
+    </div>
+    </form>
+</div>

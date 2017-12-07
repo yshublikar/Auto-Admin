@@ -1,0 +1,23 @@
+<div class="city">
+     <div class="col-md-12">
+        <div class="page-heading"> <span>Import Logs For Country</span>
+        </div>
+    </div>
+    <div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table ng-table="tableParams" show-filter="isFiltersVisible" class="table table-striped table-bordered list-table" ng-init="getAllCountry()">
+                    <tr ng-repeat="city in $data ">
+                        <td data-title="'Sr No.'">{{$index+1}}</td>
+                        <td data-title="'Country'" sortable="'country'" filter="{ 'country': 'text' }">{{city.country}} </td>
+                        <td data-title="'Last Import Start Date'" sortable="'lastImportStartDate'" filter="{ 'lastImportStartDate': 'text' }">{{city.lastImportStartDate | date:'dd-MMM-yyyy'}} </td>
+                        <td data-title="'Last Import Completed Date'" sortable="'lastImportCompleteDate'" filter="{ 'lastImportCompleteDate': 'text' }">{{city.lastImportCompleteDate ?city.lastImportCompleteDate : 'Importing...' | date:'dd-MMM-yyyy'}} </td>
+                        <td data-title="'Actions'"> <a href="javascript:;" class="btn btn-success btn-xs" ng-click="(city.lastImportCompleteDate==null) || importNow(city)" ng-disabled="city.lastImportCompleteDate==null">Import Now</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div ng-show="isData">No data found</div>
+        </div>
+    </div>
+</div>

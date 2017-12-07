@@ -1,0 +1,41 @@
+<div class="city">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-heading"> <span>Import Cities</span></div>
+        </div>
+    </div>
+    <!--    <div class="row">
+        <div class="col-md-2">
+            <input type="text" name="countryCode" class="form-control required" ng-model="countryCode" required="" placeholder="Coutry Code">
+        </div>
+        <div class="col-md-3">
+            <div class="page-actions pull-left col-md-8">
+                <input file-model="citiesFile" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" size="10" onchange="angular.element(this).scope().isFileExist(this)" />
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-success" ng-disabled="!isImport" ng-click="!isImport || uploadFile()" style="width: 105px;">{{uploading?'Importing...':'Import Cities'}}</a>
+            </div>
+        </div>
+    </div> -->
+    <div class="panel panel-default">
+        <!-- <div class="panel-body"> -->
+            <div class="row panel-body">
+                <div class="col-md-3">
+                    <input type="text" name="countryCode" class="form-control required" ng-model="countryCode" required="" placeholder="Coutry Code">
+                </div>
+            </div>
+            <div class="row panel-body">
+                <div class="col-md-3">
+                    <input file-model="citiesFile" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" size="10" onchange="angular.element(this).scope().isFileExist(this)" />
+                </div>
+            </div>
+            <div class="row panel-body">
+                <div class="col-md-12">
+                    <a class="btn btn-success" ng-disabled="!isImport" ng-click="!isImport || uploadFile()" style="width: 105px;">{{uploading?'Importing...':'Import Cities'}}</a>
+                     Download sample template <a href="{{SITE_URL}}import-cities-sample/sample.csv" download>.csv </a><a href="{{SITE_URL}}import-cities-sample/sample.xlsx" download>.excel </a>
+                </div>
+              
+            </div>
+        <!-- </div> -->
+    </div>
+</div>

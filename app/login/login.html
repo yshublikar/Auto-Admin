@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="login" ng-hide="forgotContainer">
+          <h2 class="text-center bold-text">Sign In</h2>
+          <div class="row">
+            <form div class="col-sm-8 col-sm-offset-2 p-t-20" name="myForm" ng-submit="doLogin()">
+              <div class="form-group">
+                <input type="email" name="email" ng-model="userData.email" class="form-control height-42"  placeholder="Email" required="">
+              </div>
+               <div class="form-group p-b-20">
+                <input type="password" name="password" ng-model="userData.password" class="form-control height-42"  placeholder="Password" required="">
+               
+                <a href="#" ng-click="forgotContainer=true" class="pull-right f-12 gray-text m-t-5" > Forget Password?</a>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block button-shadow" >Login </button>
+             <br/><br/>
+            </form>
+
+          </div>
+
+       
+        </div>
+
+         <div class="login" ng-show="forgotContainer">
+          <h2 class="text-center bold-text">Forgot Password</h2>
+            <div class="row">
+              <form div class="col-sm-8 col-sm-offset-2 p-t-20" name="forgotPasswordForm"  ng-submit="sendForgotLink()">
+                  <div class="form-group p-b-20"">
+                    <input type="email" name="email" ng-model="email" class="form-control height-42"  placeholder="Email" required="">
+                   
+                     <a href="#" ng-click="forgotContainer=false" class="pull-right f-12 gray-text m-t-5" > Back To Login</a>
+                  </div>
+                   
+                  <button type="submit" class="btn btn-primary btn-lg btn-block button-shadow" ng-disabled="processing">{{processing?'processing':'Submit'}} </button>
+                 
+                 <br/><br/>
+                </form>
+                
+              </div> 
+
+        </div>
+
+         <!--  <p class="text-center">Don't have an account? <a href="" class="bold-text"> Create a new Account </a>
+
+          </p>
+             -->
+      </div>
+    </div>
+  </div>

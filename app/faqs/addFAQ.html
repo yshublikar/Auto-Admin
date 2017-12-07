@@ -1,0 +1,64 @@
+<form name="addFaqForm" id="addFaqForm" ng-submit="addFaq()">
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-heading"> <span>FAQs</span>
+            <div class="page-actions pull-right">
+                <a class="btn btn-default" ui-sref="app.faqs">BACK</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-12" style="margin-top: 1%">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Add FAQ</h3>
+            </div>
+            <div class="panel-body">
+                
+                    <div class="form-group">
+                        <label for="questionTitle">Question Title</label>
+                        <input type="text" class="form-control" id="questionTitle" ng-model="faqModel.title" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="questionDescription">Description</label>
+                        <summernote height="300"></summernote>
+                        <textarea class="form-control" rows="4" id="questionDescription" ng-model="faqModel.description"  required=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="questionSection">Section</label>
+                                <select class="form-control" id="questionSection" ng-model="faqModel.section"  required="">
+                                    <option value="" disabled>Select Section</option>
+                                    <option ng-repeat="item in sections" value="{{item._id}}">{{item.masterValue}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="questionCategory">Category</label>
+                                <select class="form-control" id="questionCategory" ng-model="faqModel.category" >
+                                    <option value="" disabled>Select Category</option>
+                                    <option ng-repeat="item in categories" value="{{item._id}}">{{item.masterValue}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                   <!--  <div class="form-group">
+                        <label for="questionFeatured">Featured</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="faqModel.featured" ng-value="true" required >Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" ng-model="faqModel.featured" ng-value="false">No
+                        </label>
+                    </div> -->
+                
+            </div>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary" >Save FAQ</button>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+</form>

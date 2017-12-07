@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-heading"> <span>Car Models</span>
+            <div class="page-actions pull-right">
+                <a class="btn btn-success" ng-click="addModel()">Add Model</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="table-responsive">
+
+            <table class="table table-striped table-bordered list-table" ng-table="tableParams" show-filter="false" ng-init="getAllCarModels()">
+                
+                <tr ng-repeat="carModel in carModels">
+                    <td data-title="'Sr.No.'">{{$index+1}}</td>
+                    <td data-title="'Make'" ng-init="carModel.name=carModel.makeId.name" sortable="'name'" filter="{ 'name': 'text' }">{{carModel.makeId.name}}</td>
+                    <td data-title="'Model'" sortable="'model'" filter="{ 'model': 'text' }">{{carModel.model}}</td>
+                    <td data-title="'Segment Type'" ng-init="carModel.segment=carModel.segmentType.masterValue" sortable="'segment'" filter="{ 'segment': 'text' }">{{carModel.segmentType.masterValue}}</td>
+                    <td data-title="'Body Style'" ng-init="carModel.body=carModel.bodyStyle.masterValue" sortable="'body'" filter="{ 'body': 'text' }">{{carModel.bodyStyle.masterValue}}</td>
+                    <td>
+                        <a href="" class="btn btn-warning btn-xs" ng-click=editCarModel($index)>Edit</a>
+                        <a href="" class="btn btn-danger btn-xs" ng-click="removeCarModel(carModel._id,$index)">Delete</a></td>
+                
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

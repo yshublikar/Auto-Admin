@@ -1,0 +1,207 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-heading"> <span>{{storeModel._id?"Edit Store":"Add Store"}}</span>
+            <div class="page-actions pull-right">
+                <a class="btn btn-default" ui-sref="app.stores">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <form name="frmAddStore" id="addStore" style="margin-top: 1%">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{storeModel._id?"Edit Store":"Add Store"}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label >Name</label>
+                                <input type="text" class="form-control" name="name" ng-model="storeModel.name" required ng-change="makeVanityUrl()">
+                            </div>
+                            <div class="col-md-6">
+                                <label >Vanity Url</label>
+                                <input type="text" class="form-control" name="vanityUrl" ng-model="storeModel.vanityUrl" required ng-readonly="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="make">Make</label>
+                                <select class="form-control" id="make" name="make" ng-model="storeModel.makeId" ng-options="make._id as make.name for make in makes" required>
+                                    <option value="">Select Make</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="questionSection">Type</label>
+                                <select class="form-control" name="type" ng-model="storeModel.type" required>
+                                    <option value="">Select Section</option>
+                                    <option value="Dealership">Dealership</option>
+                                    <option value="Workshop">Workshop</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label >Phone</label>
+                                <input type="text" class="form-control" name="type" 
+                                ng-model="storeModel.phone" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label >Email</label>
+                                <input type="email" name="type" class="form-control" ng-model="storeModel.email" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="questionDescription">Description</label>
+                                <textarea class="form-control" name="description" rows="2" ng-model="storeModel.shortDescription" required></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Website</label>
+                                <input type="url" pattern="https?://.+" name="website" class="form-control" ng-model="storeModel.website" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                                <textarea class="form-control" name="address" rows="2" ng-model="storeModel.address" required></textarea>
+                                <div class="m-t-10">
+                                    <label for="city">City</label>
+                                    <select class="form-control" id="city" name="city" ng-model="storeModel.cityId" ng-change="setCountry(storeModel.cityId)" ng-options="city._id as city.name for city in cities" required>
+                                        <option value="">Select City</option>
+                                    </select>
+                                    <p class="text-muted">State: {{storeModel.state}}, Country: {{storeModel.country}}</p>
+                                </div>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Latitude</label>
+                                            <input type="number" name="lattitude" class="form-control" ng-model="storeModel.lattitude" required step="any">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Longitude</label>
+                                            <input type="number" name="longitude" class="form-control" ng-model="storeModel.longitude" required step="any">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="m-t-10">
+                                            <label for="questionDescription">Logo</label>
+                                                <input type="file" id="icon" name="file" file-model="file" 
+                                                    class="form-control" ng-required="!storeModel._id"  
+                                                   > <!--  ng-model="file" onchange="angular.element(this).scope().checkDimensions('217','115')" -->
+                                        </div>
+                                        <p ng-if="storeModel._id">
+                                            <a href="{{SITE_URL}}{{storeModel.logo}}">Logo</a>
+                                        </p>
+                                        <p><small> Dimension: [217px X 115px]</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <caption>Working Hours</caption>
+                                    <tr>
+                                        <th>Day</th>
+                                        <th>Closed</th>
+                                        <th>Hours</th>
+                                    </tr>
+                                    <tr ng-repeat="workingHour in storeModel.workingHours">
+                                        <td>{{workingHour.day}}</td>
+                                        <td>
+                                            <input type="checkbox" name="closed{{$index}}" ng-model="workingHour.closed">
+                                        </td>
+                                        <td>
+                                       <!--  ng-required="!workingHour.closed" -->
+                                    <select ng-disabled="workingHour.closed" name="start{{$index}}" ng-model="workingHour.start" ng-options="h as h for h in hours" >
+                                            <option value="">Select From</option>
+                                            </select>
+                                            <select ng-disabled="workingHour.closed" name="end{{$index}}" ng-model="workingHour.end" ng-options="h as h for h in hours" >
+                                                <option value="">Select To</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <!-- <div class="col-md-6">
+                                <label for="questionFeatured">Featured</label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="questionFeatured" name="featured" ng-model="storeModel.featured" ng-value="true" required>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="questionFeatured1" name="featured" ng-model="storeModel.featured" ng-value="false" required>No
+                                </label>
+                            </div> -->
+                             <div class="col-md-6">
+                                 <label for="FourSquare">Added Manually</label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="FourSquare" name="foursquare" ng-model="storeModel.manuallyUpdated" ng-value="true" required>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="FourSquare" name="foursquare" ng-model="storeModel.manuallyUpdated" ng-value="false" required>No
+                                </label>
+                             </div>
+                            <!--  <div class="col-md-4">                               
+                                 <div class="form-group">
+                                    <label for="">From</label>
+                                    <input type="date" name="featuredFrom" class="form-control" ng-model="storeModel.featuredFrom" required />
+                                </div>
+                               
+                              
+                            </div> -->
+                           <!--  <div class="col-md-4">                               
+                               
+                                <div class="form-group">
+                                    <label for="">To </label>
+                                    <input type="date" name="featuredTo" class="form-control" ng-model="storeModel.featuredTo" required/>
+                                </div>
+                              
+                            </div> -->
+                           
+                            
+                        </div>
+                    </div>
+                    <!--  <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="FourSquare">Allow FourSquare API to update info</label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="FourSquare" name="foursquare" ng-model="storeModel.manuallyUpdated" ng-value="true" required>Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="FourSquare" name="foursquare" ng-model="storeModel.manuallyUpdated" ng-value="false" required>No
+                                </label>
+                            </div>
+
+                        </div>
+                    </div> -->
+                </div>
+                <div class="panel-footer" ng-if="!storeModel._id">
+                    <button type="submit" class="btn btn-primary" ng-click="addStore(frmAddStore)" ng-disabled="processing">{{processing?'processing':'Save'}}</button>
+                </div>
+                <div class="panel-footer" ng-if="storeModel._id">
+                    <button type="submit" class="btn btn-primary" ng-click="updateStore(frmAddStore)" ng-disabled="processing">{{processing?'processing':'Update'}}</button>
+                </div>
+            </div>
+    </div>
+    </form>
+</div>
+</div>

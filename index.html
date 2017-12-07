@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="brandLabel">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>BrandLabel Admin</title>
+    <!-- Bootstrap -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+     <link href="assets/css/addon.css" rel="stylesheet" />
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!--Angular js-->
+    <script type="text/javascript" src="bower_components/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate.min.js"></script>
+    <!-- uiRouter -->
+    <script type="text/javascript" src="bower_components/angular-ui-router.min.js"></script>
+    <!-- ui-bootstrap -->
+    <script type="text/javascript" src="bower_components/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/sweetalert/dist/sweetalert.css">
+    <!-- ngTable -->
+    <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css">
+    <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
+    <!-- ngToast -->
+    <link href="bower_components/AngularJS-Toaster-master/toaster.min.css" rel="stylesheet" />
+    <script src="bower_components/AngularJS-Toaster-master/toaster.min.js"></script>
+  
+    <!-- Ng Rateit -->
+    <link rel="stylesheet" href="bower_components/angular-rateit/dist/ng-rateit.css" />
+    <script src="bower_components/angular-rateit/dist/ng-rateit.js"></script>
+   <!--  <script src="bower_components/angular-image-dimensions/dist/angular-image-dimensions.js"></script> -->
+
+    
+
+</head>
+
+<body>
+    <data ui-view></data>
+     <toaster-container toaster-options="{'close-button':true, 'time-out':2000 }"></toaster-container>
+
+    <script type="text/javascript" src="config.js"></script>
+
+    <script type="text/javascript" src="config.run.js"></script>
+    <script type="text/javascript" src="config.constants.js"></script>
+    <!-- services -->
+    <script type="text/javascript" src="httpService.js"></script>
+    <script type="text/javascript" src="directives.js"></script>
+    <!-- Plugins -->
+    <script type="text/javascript" src="bower_components/underscore/underscore-min.js"></script>
+    
+    <!-- controllers -->
+    <script src="app/appCtrl.js"></script>
+    <script type="text/javascript" src="app/login/loginCtrl.js"></script>
+    <script type="text/javascript" src="app/dashboard/dashboardCtrl.js"></script>
+    <script type="text/javascript" src="app/adminUsers/adminUsersCtrl.js"></script>
+
+    <script type="text/javascript" src="app/cities/citiesCtrl.js"></script>    
+    <script type="text/javascript" src="app/importCities/importCitiesCtrl.js"></script>  
+    <script type="text/javascript" src="app/importLogs/importLogsCtrl.js"></script>  
+
+    <script type="text/javascript" src="app/faqs/faqsCtrl.js"></script>
+
+    <script type="text/javascript" src="app/stores/storesCtrl.js"></script>    
+    <script type="text/javascript" src="app/stores/addStoreCtrl.js"></script>
+    <script type="text/javascript" src="app/featuredStores/featuredStoresCtrl.js"></script>
+
+
+    <script type="text/javascript" src="app/faqs/addFaqCtrl.js"></script>
+
+    <script type="text/javascript" src="app/makes/makesCtrl.js"></script>
+    <script type="text/javascript" src="app/makes/addMakeCtrl.js"></script>
+
+    <script type="text/javascript" src="app/login/setPasswordCtrl.js"></script>
+    <script type="text/javascript" src="app/changePassword/changePasswordCtrl.js"></script>
+
+    <script type="text/javascript" src="app/questions/questionsCtrl.js"></script>
+    <script type="text/javascript" src="app/forms/formsCtrl.js"></script>
+    <script type="text/javascript" src="app/forms/addFormCtrl.js"></script>
+    <script type="text/javascript" src="app/groupType/groupTypeCtrl.js"></script>
+   
+
+    <script type="text/javascript" src="app/carModels/carModelCtrl.js"></script>
+    <script type="text/javascript" src="app/config/configCtrl.js"></script>
+    <script type="text/javascript" src="app/masters/mastersCtrl.js"></script>
+    <script type="text/javascript" src="app/pages/pagesCtrl.js"></script>
+    <script type="text/javascript" src="app/users/usersCtrl.js"></script>
+    <script type="text/javascript" src="app/experiences/experiencesCtrl.js"></script>
+    <script type="text/javascript" src="app/experiences/experienceDetailsCtrl.js"></script>
+    <script type="text/javascript" src="app/featuredExperiences/featuredExperiencesCtrl.js"></script>
+    <script type="text/javascript" src="app/newsletterUsers/newsletterUsersCtrl.js"></script>
+
+</body>
+
+</html>

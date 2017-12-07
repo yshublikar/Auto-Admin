@@ -1,0 +1,14 @@
+/* Additional css*/
+.flagged{
+  background-color: #fff;
+  border:2px solid #FE9C31;
+   min-height:50px ;
+   margin: 1%; 
+   padding: 1% 
+}
+.unflagged{
+	 background-color:#fff ;
+   min-height:50px ;
+   margin: 1%; 
+   padding: 1% 
+}

@@ -1,0 +1,110 @@
+<div class="row" ng-init="getExperince()">
+    <div class="col-md-12">
+        <div style="margin: 20px 0;">
+            <span style="font-size:20px;display: inline-block;"></span>
+            <a ui-sref="app.experiences" class="btn btn-default pull-right">Back to list</a>
+        </div>
+        <div class="pane panel-default">
+            <div class="panel-heading">
+                Experience Details
+                <span class="pull-right"><small><i class="fa fa-user"></i> {{experience.userId.name}} on {{experience.posts[0].postedOn | date:'dd-MMM-yyyy hh:mm:a'}}</small></span>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+
+                    <div class="col-md-4">
+                    <p><strong>Incident Date:</strong> {{experience.incidentDate | date:'dd-MMM-yyyy'}}</p>
+                        <p><strong>Best Thing:</strong> {{experience.bestThing?experience.bestThing:"Not mentioned"}}</p>
+                        <p><strong>Worst Thing:</strong> {{experience.worstThing?experience.worstThing:"Not mentioned"}}</p>
+                        <p><strong>Recommended:</strong> {{experience.isRecommended ? 'Yes': 'No'}}</p>
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <p><strong>Car Model :</strong> {{experience.vehicle.carModelId.model?experience.vehicle.carModelId.model:"Not mentioned"}}</p>
+                        <span ng-repeat="variant in experience.vehicle.carModelId.variants">
+                        <p ng-if="variant._id==experience.vehicle.variantId"><strong>Variant Id: </strong>{{variant.name}}</p>
+                        </span>
+                        <p><strong>Year: </strong>{{experience.vehicle.year?experience.vehicle.year:"Not mentioned"}}</p>
+                        <p><strong>Vin: </strong>{{experience.vehicle.vin}}</p>
+                    </div>
+                     <div class="col-md-4">
+                        
+                        
+                        <p ng-show="experience.closed==true"><strong>Closed Date:</strong> {{experience.closedDate | date:'dd-MMM-yyyy'}}</p>
+                        <p ng-show="experience.closed==true"><strong>Closing Notes:</strong> {{experience.closingNotes}}</p>
+                        <p><strong>Status: </strong>{{experience.closed==true?'Closed':'Open'}}</p>
+                        <p><a href="{{SITE_URL}}{{experience.storeId.city}}/{{experience.storeId.vanityUrl}}/experiences/{{title}}?experience={{experience.experienceId}}" target="_blank">Link to front end view</a></p>
+                    </div>
+                </div>
+              <!--   <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-warning" ng-if="experience.featured" ng-click="featured(experience._id)">Unfeatured</a>
+                        <a class="btn btn-warning" ng-if="!experience.featured" ng-click="featured(experience._id)">Make As Featured</a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="pane panel-default" ng-repeat="post in experience.posts" ng-class="post.flagged.length>0?'flagged':'unflagged'">
+            <div class="panel-heading">
+                {{post.title}}
+            </div>
+            <div class="pane panel-body">
+                <div class="row" style="border:1px solid #ccc">
+
+                    <div class="col-md-4" style="background-color:#F8F8F8 ;height: 300px ;overflow: auto;">
+                    <div class="row">
+                        <div class="col-md-4"><h4 class="card-title" style="display:inline-block; padding-right:  2%">
+                             <ng-rate-it ng-model="post.rating " read-only='true' max=5 style="display:inline-block; ">
+                                </ng-rate-it> 
+                            </h4></div>
+                         <div class="col-md-8">
+                        <span style="padding-right:  2%"> <i class="fa fa-thumbs-up " aria-hidden="true " style="padding-right:  1%"></i> ({{post.likes.length}})  </span>
+                                <span style="padding-right:  1%">|</span>
+                         <span style="padding-right:  2%"><i class="fa fa-flag" aria-hidden="true" style="padding-right:  2%"></i> ({{post.flagged.length}}) </span>
+                            
+                         </div>
+                    </div>
+                        <!--Panel-->
+                        <div class="card card-body">
+                            
+                            
+                            <p class="card-text ">{{post.description}}</p>
+                            <span class="pull-left ">
+                                <i class="fa fa-user "></i> {{experience.userId.name}} on {{experience.posts[0].postedOn | date:'dd-MMM-yyyy'}}
+                                </span>
+                            <span class="pull-right ">
+                                 <a class="btn btn-default btn-xs"  ng-click="bannUser(experience.userId._id)"" ng-if="experience.userId.status=='Active'"><i class="fa fa-ban " aria-hidden="true "></i>
+                                   Block User</a>
+                                   <span style="color: red" ng-if="experience.userId.status=='Banned'"> Blocked User</span>
+                            </span>
+                            <div class="clearfix"></div>
+                            <a class="btn btn-default btn-block " style="margin-top: 2%;padding-right:  2%" aria-hidden="true " ng-click="removePost(experience._id,post._id)">
+                            Delete this Post</a>
+                        </div>
+                        <!--/.Panel-->
+                    </div>
+                    <div class="col-md-8 pull-right " style="background-color: #f2f2f2 ;height: 300px; overflow: auto; padding: 1% ">
+                        <!--Panel-->
+                        <div class="card card-body " style="" ng-repeat="comment in post.comments " ng-class="comment.flagged.length>0?'flagged':'unflagged'">
+                            <p class="card-text ">{{comment.comment}}</p>
+                            <i class="fa fa-thumbs-up " aria-hidden="true "></i>
+                            <span style="padding-right:  1%"> ({{comment.likes.length}})</span> <span style="padding-right:  1%">|</span>
+                            <i class="fa fa-flag " aria-hidden="true "></i>
+                            <span style="padding-right:  1%">({{comment.flagged.length}}) </span>
+                            <span style="padding-right:  1%">|</span>
+                            <span style="padding-right:  1%">
+                            <a class="btn btn-default btn-xs" ng-click="removeComment(experience._id,post._id,comment._id)"><i class="fa fa-trash " aria-hidden="true "></i> Delete
+                            </a></span>
+                            <div class="col-sm-6 pull-right ">
+                                <i class="fa fa-user "></i> {{comment.userId.name}} on {{comment.postedOn | date:'dd-MMM-yyyy'}} <span style="padding-right:  1%">|</span>
+                                <a class="btn btn-default btn-xs" ng-if="comment.userId.status=='Active'" ng-click="bannUser(comment.userId._id)"><i class="fa fa-ban " aria-hidden="true "></i> Block User</a>
+                                <strong ng-if="comment.userId.status=='Banned'"> Blocked User</strong>
+                            </div>
+                            </span>
+                        </div>
+                        <!--/.Panel-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h3 class="modal-title">Edit Page</h3>
+</div>
+<div class="modal-body" ng-init="getPageContents()">
+    <form name="frmStaticPages" role="form">
+        <div class="form-group">
+            <label for="">{{pageModel.name}}</label>
+            
+        </div>
+        <div class="form-group">
+            <label>Contents:</label>
+            <textarea rows="15" class="form-control" ng-model="pageModel.contents"> </textarea>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-disabled="processing" ng-click="update(pageModel)">{{processing?'processing':'Update'}}</button>
+    <button class="btn btn-default btn-o" ng-click="cancel()">Cancel</button>
+</div>

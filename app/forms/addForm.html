@@ -1,0 +1,170 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-heading"> <span>Forms</span>
+            <div class="page-actions pull-right">
+                <a class="btn btn-default" ui-sref="app.forms">Back</a>
+            </div>
+        </div>
+    </div>
+    <form name="addForm" id="addForm" ng-submit="saveForm();">
+        <div class="col-md-12" style="margin-top: 1%">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{isEdit?'Edit Form':'Add Form'}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Experience Type:</label>
+                                <input type="text" class="form-control" ng-model="formModel.experienceType" required="">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" ng-model="formModel.status" value="Active" required="">Active
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="status" ng-model="formModel.status" value="Archieved">Archieved
+                                </label>
+                            </div>
+                        </div>
+                              <div class="col-md-4">
+                                            <label>Type</label>
+                                            <select class="form-control" ng-model="formModel.type" required="">
+                                                <option value="">Select Type</option>
+                                                <option value="Dealership">Dealership</option>
+                                                <option value="Workshop">Workshop</option>
+                                            </select>
+                                        </div>
+                    </div>
+                    <fieldset>
+                        <legend>Question Groups for Form</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" ng-model="questionGroups.name">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Type</label>
+                                        <select class="form-control" ng-model="questionGroups.type">
+                                                <option value="">Select Type</option>
+                                                <option  ng-repeat="row in groupType" value="{{row._id}}">{{row.name}}</option>                                                
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Group Sequence No</label>
+                                            <input type="number" class="form-control" ng-model="questionGroups.sequenceNo">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-repeat="(questionIndex,question) in questionGroups.questions">
+                                    <div class="col-md-6">
+                                        <label>Question</label>
+                                        <!--  <input type="text" class="form-control" ng-model="question.questionId"> -->
+                                        <input type="text" autocomplete="off" name="question" class="form-control" ng-model="question.questionText" typeahead-on-select="selectQuestion(questionIndex,$item,div)" ng-change="searchQuestion(question.questionText)" uib-typeahead="quest as quest.displayText for quest in questionList" typeahead-min-length="1" typeahead-wait-ms="1000" placeholder="Select Question">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Sequence No</label>
+                                        <input type="text" class="form-control" ng-model="question.sequenceNo">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label> &nbsp;</label>
+                                        <a href="" class="btn btn-success btn-xs" ng-click="questionGroups.questions.push({})"><i class="fa fa-plus"></i></a>
+                                        <a href="" class="btn btn-danger btn-xs" ng-click="questionGroups.questions.splice($index,1)" ng-if="$index != 0"><i class="fa fa-minus"></i></a>
+                                    </div>
+                                </div>
+                                <div class="form-group m-t-10">
+                                    <a class="btn btn-default" ng-click="addGroup()">Add Group</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <caption>Groups</caption>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Sequence No</th>
+                                     <!--    <th>Question text</th> -->
+                                        <th>Actions</th>
+                                    </tr>
+                                    <tr ng-repeat="group in formModel.questionGroups">
+                                        <td>{{group.name}}</td>
+                                        <td>{{isEdit?(group.type.name?group.type.name:group.groupName):group.groupName}}</td>
+                                        <td>{{group.sequenceNo}}</td>
+                                       <!--  <td>
+                                            <ol ng-repeat="g in group.questions">
+                                                <li>{{g.questionText.displayText}}</li>
+                                            </ol> 
+                                        </td> -->
+                                        <td><a href="" class="text-danger" ng-click="removeGroup($index);"><i class="fa fa-times"></i>
+                                    Remove</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Question for Form</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row" >
+                                    <div class="col-md-6">
+                                        <label>Question</label>
+                                        <input type="text" autocomplete="off" name="questions" class="form-control" ng-model="questions.questionsText" typeahead-on-select="selectInQuestion($item,div)" ng-change="searchQuestion(questions.questionsText)" uib-typeahead="quest as quest.displayText for quest in questionList" typeahead-min-length="1" typeahead-wait-ms="500" placeholder="Select Question">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Sequence No</label>
+                                        <input type="text" class="form-control" ng-model="questions.sequenceNo">
+                                    </div>
+                                   <!--  <div class="col-md-2">
+                                        <label> &nbsp;</label>
+                                        <a href="" class="btn btn-success btn-xs" ng-click="questions.push({})"><i class="fa fa-plus"></i></a>
+                                        <a href="" class="btn btn-danger btn-xs" ng-click="questions.splice($index,1)" ng-if="$index != 0"><i class="fa fa-minus"></i></a>
+                                    </div> -->
+                                </div>
+                                <div class="form-group m-t-10">
+                                    <a class="btn btn-default" ng-click="addQuestion()">Add Question</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <caption>Question</caption>
+                                    <tr>
+                                        <th>Question text</th>
+                                        <th>Type</th>
+                                        <th>Sequence No</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    <tr ng-repeat="q in formModel.questions" ng-show="q.questionsText.displayText">
+                                        <td>{{q.questionsText.displayText}}</td>
+                                        <td>{{q.questionsText.type}}</td>
+                                        <td>{{q.sequenceNo}}</td>
+                                       
+                                        <td><a href="" class="text-danger" ng-click="remove($index);"><i class="fa fa-times"></i>
+                                    Remove</a></td>
+                                    </tr>
+                                    <tr ng-repeat="q in formModel.questions" ng-show="q.questionId.displayText">
+                                        <td>{{q.questionId.displayText}}</td>
+                                        <td>{{q.questionId.type}}</td>
+                                        <td>{{q.sequenceNo}}</td>
+                                       
+                                        <td><a href="" class="text-danger" ng-click="remove($index);"><i class="fa fa-times"></i>
+                                    Remove</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="panel-footer">
+                    <button type="submit" class="btn btn-primary" ng-disabled="processing">{{processing || 'Save Form'}}</button>
+                </div>
+            </div>
+    </form>
+    </div>

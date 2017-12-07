@@ -1,0 +1,94 @@
+<div class="row">
+                <form name="addMakeForm" id="addMakeForm" ng-submit="saveMake();">
+
+    <div class="col-md-12">
+        <div class="page-heading"> <span>Makes</span>
+            <div class="page-actions pull-right">
+                <a class="btn btn-default" ui-sref="app.makes">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-default" style="margin-top: 1%">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{makeModel._id?"Edit Make":"Add Make"}}</h3>
+            </div>
+
+
+            <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Make Name:</label>
+                                <input type="text" class="form-control" ng-model="makeModel.name" required ng-change='makeVanityUrl()'>
+                            </div>
+                             <div class="form-group">
+                                <label >Vanity Url</label>
+                                <input type="text" class="form-control" name="vanityUrl" ng-model="makeModel.vanityUrl" required ng-readonly="true">
+                            </div>
+                            <fieldset>
+                                <legend>Add Offer for Make</legend>
+                                <div class="form-group">
+                                    <label>Offer Title:</label>
+                                    <input type="text" class="form-control" ng-model="offer.title"  >
+                                </div>
+                                <div class="form-group">
+                                    <label>Short Description:</label>
+                                    <textarea rows="3" class="form-control" ng-model="offer.shortDescription" > </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Full Description:</label>
+                                    <textarea rows="3" class="form-control" ng-model="offer.fullDescription" > </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Offer Image:</label>
+                                    <input type="file" id="offerImage" name="offerImage" class="form-control" ng-model="offer.image">
+                                    <p><small> Dimension: [369px X 240px]</small></p>
+                                </div>
+                                <div class="form-group">
+                                    <a href="" class="btn btn-success" ng-click="addOffer();" ng-disabled="uploading" >{{uploading || 'Add'}}</a>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="pwd">Branding Image:</label>
+                                <input type="file" name="brandingImage" class="form-control" ng-model="makeModel.brandingImage" ng-required="!makeModel._id" {{makeModel._id?"edit":"add"}}>
+                                <p ng-if="makeModel._id">
+                                    <a target="_blank" href="{{makeModel.brandingImage}}">Branding Image</a>
+                                </p>
+                                <p><small> Dimension: [1600px X 574px]</small></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Logo Image:</label>
+                                <input type="file" name="logo" class="form-control" ng-model="makeModel.logo" ng-required="!makeModel._id" {{makeModel._id?"edit":"add"}}>
+                                <p ng-if="makeModel._id">
+                                    <a target="_blank" href="{{makeModel.logo}}">Logo Image</a>
+                                </p>
+                                <p><small> Dimension: [170px X 91px]</small></p>
+                            </div>
+                            <table class="table">
+                                <caption> Added Offers</caption>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Title</th>
+                                    <th>Actions</th>
+                                </tr>
+                                <tr ng-repeat="offer in makeModel.offers">
+                                    <td>{{$index+1}}</td>
+                                    <td> {{offer.title}} </td>
+                                    <td><a href="" class="text-danger" ng-click="removeOffer($index);"><i class="fa fa-times"></i>
+                                    Remove</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+               
+            </div>
+            <div class="panel-footer">
+                <button type="submit" class="btn btn-primary"  ng-disabled="processing">{{processing || 'Save Make'}}</button>
+            </div>
+        </div>
+    </div>
+     </form>
+</div>

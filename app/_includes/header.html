@@ -1,0 +1,87 @@
+<nav class="navbar navbar-fixed-top navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a ui-sref="app.dashboard" class="navbar-brand">Brand Label</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <!--                 <li class="active"><a ui-sref="app.users"><i class="fa fa-users" aria-hidden="true"></i> Users <span class="sr-only">(current)</span></a></li>
+ -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i>  Users <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="app.users"> All Users</a></li>
+                        <li><a ui-sref="app.newsletterUsers"> Newsletter Users</a></li>
+                    </ul>
+                </li>
+                <!-- <li ><a ui-sref="app.experiences"><i class="fa fa-comments-o" aria-hidden="true"></i>  Experiences  </span></a></li> -->
+               <!--  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-comments-o" aria-hidden="true"></i>  Experiences 
+                     <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="app.experiences">All Experiences</a></li>
+                        <li><a ui-sref="app.featuredExperiences">Featured Experiences</a></li>
+                    </ul>
+                </li> -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" ui-sref="app.experiences" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-text" aria-hidden="true"></i>  Experiences </a>
+                </li>
+                
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Listings <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="app.stores"> All Stores</a></li>
+                        <li><a ui-sref="app.featuredStores"> Featured Stores</a></li>
+                        <li><a ui-sref="app.makes"> Makes</a></li>
+                        <li><a ui-sref="app.carModels"> Models</a></li>
+                        <li><a ui-sref="app.cities"> Cities</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-text" aria-hidden="true"></i>  Contents <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="app.questions">  Questions</a></li>
+                        <li><a ui-sref="app.forms"> Forms</a></li>
+                        <li><a ui-sref="app.groupType"> Group Type</a></li>
+                        <li><a ui-sref="app.faqs">  FAQs</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" ui-sref="app.pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-text" aria-hidden="true"></i>  Static Pages </a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i>  Settings <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="app.adminUsers"> Admin Users</a></li>
+                        <li><a ui-sref="app.masters"> Masters</a></li>
+                        <li><a ui-sref="app.config"> Config</a></li>
+                        <li><a ui-sref="app.import-cities"> Import Cities</a></li>
+                        <li><a ui-sref="app.import-logs"> Import Logs</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><!-- <span class="user-img" style="color:#555;" "><i class="fa fa-user-o"    aria-hidden="true"></i></span> --> 
+            Hello, {{user.firstName}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="app.change-password"> Change Password</a></li>
+                        <li><a ui-sref="app.change-password" ng-click="logout()"> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
